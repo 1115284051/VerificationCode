@@ -58,23 +58,23 @@
                 dotColor: '#5cbdaa',
                 lineColor: '#5cbdaa'
             });
-
+            //huadongCode();
             Slider_init();
         });
 
-
+        //初始化滑动条
         function Slider_init() {
             var slider = new SliderUnlock("#slider", {
                 successLabelTip: "验证成功"
             }, function () {
-
+                //当滑动条滑到最右边时，显示刷新图片
                 huadongCode();
             });
             slider.init();
         }
 
 
-
+        //刷新图片，从后台拿去图片
         function huadongCode() {
 
             num = 1;
@@ -98,9 +98,10 @@
             })
         }
 
-
+        //刷新按钮
         function divrefreshClick() {
             $("#divrefresh").click(function () {
+                //刷新图片
                 huadongCode();
                 num = 1;
                 checkCode = [];
@@ -110,6 +111,7 @@
 
         var num = 1;
         var checkCode = [];
+        //当鼠标在图片上单击选字的时候，在图片上添加一个选中字体的标记
         function createPoint(pos) {
             if (num == 2) {
                 PostcheckCode();
@@ -120,7 +122,7 @@
         }
 
 
-
+        //发送检查选择的文字是否正确
         function PostcheckCode() {
 
             $.ajax({
@@ -152,7 +154,7 @@
             $(obj).parent().find('.point-area').remove();
         }
 
-
+        //获取当前鼠标所在元素的,坐标x，y
         function getMousePos(obj, event) {
             var e = event || window.event;
             var x = e.clientX - ($(obj).offset().left - $(window).scrollLeft());
@@ -161,9 +163,11 @@
             return { 'x': parseInt(x), 'y': parseInt(y) };
         }
 
+        //鼠标点击图片选文字事件
         function imageClick() {
             $("#imagediv").click(function () {
                 var _this = $(this);
+                //获取当前鼠标坐标
                 var pos = getMousePos(_this);
                 createPoint(pos);
             })
